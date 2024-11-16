@@ -1,1 +1,1 @@
-# Mango Bot is great!
+# Mango Bot is great![text](../telegram-miniapp-dynamic)
