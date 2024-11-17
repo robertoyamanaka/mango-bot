@@ -143,7 +143,12 @@ export async function POST(req: Request) {
     return NextResponse.json(receiptForSerialization);
   } catch (error: any) {
     console.error('[TRANSACTION_ERROR]', error);
-    return new NextResponse("Internal Error", { status: 500 });
+    return NextResponse.json({ 
+      error: "Internal Error",
+      details: error.message 
+    }, { 
+      status: 500 
+    });
   }
 };
 

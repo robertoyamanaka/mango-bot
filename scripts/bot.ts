@@ -48,13 +48,15 @@ bot.start((ctx: any) => {
   // URL-encode the generated JWT for safe usage in a URL
   const encodedTelegramAuthToken = encodeURIComponent(telegramAuthToken);
 
+  console.log("[DEBUG] Login URL:", `${LOGIN_URL}/?telegramAuthToken=${encodedTelegramAuthToken}`);
   // Create the inline keyboard with the Mini Web App button
-  const keyboard = {
+  try {
+    const keyboard = {
     reply_markup: {
       inline_keyboard: [
         [
           {
-            text: "Open Mini Web App 🚀",
+            text: "Open Mango Bot 🥭",
             web_app: {
               url: `${LOGIN_URL}/?telegramAuthToken=${encodedTelegramAuthToken}`,
             },
@@ -65,7 +67,10 @@ bot.start((ctx: any) => {
   };
 
   // Send a welcome message with the inline keyboard
-  ctx.reply("Welcome to XYZ Mini Web App", keyboard);
+    ctx.reply("Welcome to XYZ Mini Web App", keyboard);
+  } catch (error) {
+    console.error("[DEBUG] Error sending message:", error);
+  }
 });
 
 // Launch the bot
