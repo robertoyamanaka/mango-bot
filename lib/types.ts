@@ -8,6 +8,8 @@ export type PrizeRedeem = {
 
 export type Prize = {
   id: string;
-  name: string;
-  description: string;
+  redeemCode: string;
+  maxRedeems: number;
+  maxRedeemsPerUser: number;
+  createdAt: string;
 };
