@@ -6,7 +6,6 @@ import {
   useDynamicContext,
 } from "../lib/dynamic";
 
-import Spinner from "./Spinner";
 import Link from "next/link";
 
 export default function Main() {

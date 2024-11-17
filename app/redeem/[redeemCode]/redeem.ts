@@ -73,7 +73,7 @@ export async function redeem({
     if (network === "0x534e5f4d41494e") {
       console.log("🚀 Starting new Starknet transfer...");
       const starknetInput = {
-        userAddress: walletAddress,
+        user_address: walletAddress,
         amount: 0.1,
       };
 
@@ -93,8 +93,8 @@ export async function redeem({
     } else {
       console.log("🚢 Starting new EVM USDC transfer...");
       const evmInput = {
-        userAddress: walletAddress,
-        chainId: network,
+        user_address: walletAddress,
+        chain_id: network,
         amount: 0.1,
       };
       const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/evm`, {
