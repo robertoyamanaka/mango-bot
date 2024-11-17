@@ -70,73 +70,69 @@ export async function redeem({
 
     // Execute the blockchain logic
     // Check if the network is Starknet
-    if (network === "0x534e5f4d41494e") {
-      console.log("🚀 Starting new Starknet transfer...");
-      const starknetInput = {
-        user_address: walletAddress,
-        amount: 0.1,
-      };
-
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/starknet`, {
-        method: "POST",
-        body: JSON.stringify(starknetInput),
-      });
-      console.log("🚢 Response from Starknet:", response);
-      const responseBody = await response.json();
-      console.log("🚢 Response from Starknet:", responseBody.data);
-      if (response.status !== 200) {
-        return {
-          success: false,
-          error: "Failed to send in Starknet",
-        };
-      }
-    } else {
-      console.log("🚢 Starting new EVM USDC transfer...");
-      const evmInput = {
-        user_address: walletAddress,
-        chain_id: network,
-        amount: 0.1,
-      };
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/evm`, {
-        method: "POST",
-        body: JSON.stringify(evmInput),
-      });
-      const responseBody = await response.json();
-      console.log("🚢 Response from EVM:", responseBody.data);
-      if (response.status !== 200) {
-        return {
-          success: false,
-          error: "Failed to send in EVM",
-        };
-      }
-    }
-    return {
-      success: false,
-      error: "Failed to redeem code",
-    };
-
-    // // Insert redeem record
-    // const { error: redeemError, data: redeemData } = await supabase
-    //   .from("prizeRedeems")
-    //   .insert({
-    //     prizeRedeemCode: redeemCode,
-    //     walletAddress,
-    //     telegramUsername,
-    //     network,
-    //   })
-    //   .select();
-
-    // if (redeemError) {
-    //   return {
-    //     success: false,
-    //     error: "Failed to redeem code",
+    // if (network === "0x534e5f4d41494e") {
+    //   console.log("🚀 Starting new Starknet transfer...");
+    //   const starknetInput = {
+    //     user_address: walletAddress,
+    //     amount: 0.1,
     //   };
+
+    //   const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/starknet`, {
+    //     method: "POST",
+    //     body: JSON.stringify(starknetInput),
+    //   });
+    //   console.log("🚢 Response from Starknet:", response);
+    //   const responseBody = await response.json();
+    //   console.log("🚢 Response from Starknet:", responseBody.data);
+    //   if (response.status !== 200) {
+    //     return {
+    //       success: false,
+    //       error: "Failed to send in Starknet",
+    //     };
+    //   }
+    // } else {
+    //   console.log("🚢 Starting new EVM USDC transfer...");
+    //   const evmInput = {
+    //     user_address: walletAddress,
+    //     chain_id: network,
+    //     amount: 0.1,
+    //   };
+    //   const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/evm`, {
+    //     method: "POST",
+    //     body: JSON.stringify(evmInput),
+    //   });
+    //   const responseBody = await response.json();
+    //   console.log("🚢 Response from EVM:", responseBody.data);
+    //   if (response.status !== 200) {
+    //     return {
+    //       success: false,
+    //       error: "Failed to send in EVM",
+    //     };
+    //   }
     // }
 
-    // return {
-    //   success: true,
-    //   data: redeemData[0] as PrizeRedeem,
-    // };
+    // Insert redeem record
+    const { error: redeemError, data: redeemData } = await supabase
+      .from("prizeRedeems")
+      .insert({
+        prizeRedeemCode: redeemCode,
+        walletAddress,
+        telegramUsername,
+        network,
+      })
+      .select();
+
+    if (redeemError) {
+      return {
+        success: false,
+        error: "Failed to redeem code",
+      };
+    }
+
+    return {
+      success: true,
+      data: redeemData[0] as PrizeRedeem,
+    };
   } catch (error) {
     console.error("error redeeming", error);
     return {
