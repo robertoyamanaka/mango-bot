@@ -39,7 +39,7 @@ export default function Main() {
             Mango Community Bot
           </h2>
           <div className="flex justify-center py-4 mb-4">
-            {isLoading ? "Cargando..." : <DynamicWidget />}
+            {isLoading ? "Loading..." : <DynamicWidget />}
           </div>
           <div className="flex flex-col justify-center space-y-4 mb-10">
             {USER_CODES.map((code) => (

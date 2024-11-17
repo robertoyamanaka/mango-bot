@@ -56,7 +56,7 @@ bot.start((ctx: any) => {
       inline_keyboard: [
         [
           {
-            text: "Open Mango Bot 🥭 to redeem your airdrops",
+            text: "Open Mango Bot for your airdrops",
             web_app: {
               url: `${LOGIN_URL}/?telegramAuthToken=${encodedTelegramAuthToken}`,
             },
@@ -67,7 +67,7 @@ bot.start((ctx: any) => {
   };
 
   // Send a welcome message with the inline keyboard
-    ctx.reply("Welcome to XYZ Mini Web App", keyboard);
+    ctx.reply("Welcome to Mango Bot 🥭", keyboard);
   } catch (error) {
     console.error("[DEBUG] Error sending message:", error);
   }
