@@ -56,7 +56,7 @@ bot.start((ctx: any) => {
       inline_keyboard: [
         [
           {
-            text: "Open Mango Bot 🥭",
+            text: "Open Mango Bot 🥭 to redeem your airdrops",
             web_app: {
               url: `${LOGIN_URL}/?telegramAuthToken=${encodedTelegramAuthToken}`,
             },
